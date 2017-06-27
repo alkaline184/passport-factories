@@ -52,9 +52,6 @@
         </div>
         <div class="col-sm-6">
           <h2>Factories</h2>
-          <button id="factoriesRefresh">
-          Refresh
-          </button>
           <div id="passport-treeview" class=""></div>
         </div>
         <div class="col-sm-3">
@@ -137,7 +134,9 @@
     <script src="{{ asset('/js/bootstrap-treeview.min.js') }}"></script>
     <script type="text/javascript">      
       $(function() {
-            
+            //Refresh Tree
+            refreshTreeView();  
+
             //Open up a socket connection to redis
             var socket = io.connect('https://passport-factories-redis.herokuapp.com/');
             
@@ -148,6 +147,7 @@
 
             var testData = [{}];
 
+            //Open up the Modal for Create/Update Factories
             $('#factoryModal').on('shown.bs.modal', function (event) {
               var button = $(event.relatedTarget);
               var modal = $(this)
@@ -181,8 +181,7 @@
               modal.find('.factoryCreateButton').text(subject)
             })
 
-            refreshTreeView();  
-
+            //Open up the Modal for Delete Factories
             $('#factoryDeleteModal').on('shown.bs.modal', function (event) {
               var button = $(event.relatedTarget);
               $('.factoryRemoveButton').attr('id', button.data('factory'));
@@ -205,10 +204,6 @@
               $('#factoryDeleteModal').modal('hide');
             });
 
-            $("#factoriesRefresh").click(function(){
-              refreshTreeView();
-            });
-
             //function will populate/refresh treeview
             function refreshTreeView(){
               $.ajax({url: "/factories", success: function(result){
@@ -224,6 +219,7 @@
               createFactory();
             });
 
+            //function will create/update new factory
             function createFactory(){
               var data = {name: $(".factory-name").val().trim(), lower: $(".factory-lower").val().trim(),
                           upper: $(".factory-upper").val().trim(), count: $(".factory-count").val().trim()};
@@ -301,13 +297,10 @@
 
             }
 
+            //Main function that builds a TreeView component
             $('#passport-treeview').treeview({
               showTags: true,
               data: testData 
-            });
-
-            $('body').on('click', ".factory-update-children", function(){
-                 alert("Children Updated");
             });
 
             function isPositiveInteger(str) {
