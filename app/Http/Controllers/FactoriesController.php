@@ -36,7 +36,7 @@ class FactoriesController extends Controller {
 
 		//Check for errors
 		try {
-	    	$res = $client->get("https://passport-factories-api.herokuapp.com/factories/");
+	    	$res = $client->get(config('app.factory_api_url') . "factories/");
 		}
 		catch (\GuzzleHttp\Exception\ConnectException $e) {
 			Log::error($e->getMessage());
@@ -54,7 +54,7 @@ class FactoriesController extends Controller {
 
 		$client = new \GuzzleHttp\Client();
 		try {
-	    	$res = $client->get("https://passport-factories-api.herokuapp.com/factories/$id");
+	    	$res = $client->get(config('app.factory_api_url') . "/factories/$id");
 		} catch (\Exception $e){
 			Log::error($e->getMessage());
 			abort(500, 'Error while fetching factory');
@@ -67,7 +67,7 @@ class FactoriesController extends Controller {
 	{
 		$client = new \GuzzleHttp\Client();
 		try {
-	    	$res = $client->get("https://passport-factories-api.herokuapp.com/factories/");
+	    	$res = $client->get(config('app.factory_api_url') . "factories/");
 		} catch (\GuzzleHttp\Exception\ConnectException $e) {
 			Log::error($e->getMessage());
 			return view('alert', ['factories'=> '', 'error'=>'Can\'t connect to API resource.']);
@@ -86,7 +86,7 @@ class FactoriesController extends Controller {
 		$client = new \GuzzleHttp\Client();
 
 		try {
-	    	$res = $client->delete("https://passport-factories-api.herokuapp.com/factories/$id");
+	    	$res = $client->delete(config('app.factory_api_url') . "factories/$id");
 	    } catch (\Exception $e){
 			Log::error($e->getMessage());
 			abort(500, 'Error while deleting factory');
@@ -109,7 +109,7 @@ class FactoriesController extends Controller {
 		$client = new \GuzzleHttp\Client();
 
 		try {
-	    	$res = $client->post("https://passport-factories-api.herokuapp.com/factories/", ['body'=>$body]);
+	    	$res = $client->post(config('app.factory_api_url') . "factories/", ['body'=>$body]);
 	    } catch (\Exception $e){
 			Log::error($e->getMessage());
 			abort(500, 'Error while creating factory');
@@ -134,7 +134,7 @@ class FactoriesController extends Controller {
 		$client = new \GuzzleHttp\Client();
 
 		try {
-	    	$res = $client->put("https://passport-factories-api.herokuapp.com/factories/$id", ['body'=>$body]);
+	    	$res = $client->put(config('app.factory_api_url') . "factories/$id", ['body'=>$body]);
 	    } catch (\Exception $e){
 			Log::error($e->getMessage());
 			abort(500, 'Error while updating factory');
@@ -155,7 +155,7 @@ class FactoriesController extends Controller {
 		$client = new \GuzzleHttp\Client();
 
 		try {
-	   	 	$res = $client->put("https://passport-factories-api.herokuapp.com/factories/$id/children");
+	   	 	$res = $client->put(config('app.factory_api_url') . "factories/$id/children");
 	    } catch (\Exception $e){
 			Log::error($e->getMessage());
 			abort(500, 'Error while adding children to the factory');

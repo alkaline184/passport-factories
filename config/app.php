@@ -97,6 +97,9 @@ return [
 
 	'log' => 'errorlog',
 
+	'factory_api_url' 	=> 'https://passport-factories-api.herokuapp.com/',
+	'factory_redis-url' => 'https://passport-factories-redis.herokuapp.com/',
+
 	/*
 	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers
