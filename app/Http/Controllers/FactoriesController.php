@@ -54,7 +54,7 @@ class FactoriesController extends Controller {
 
 		$client = new \GuzzleHttp\Client();
 		try {
-	    	$res = $client->get(config('app.factory_api_url') . "/factories/$id");
+	    	$res = $client->get(config('app.factory_api_url') . "factories/$id");
 		} catch (\Exception $e){
 			Log::error($e->getMessage());
 			abort(500, 'Error while fetching factory');
