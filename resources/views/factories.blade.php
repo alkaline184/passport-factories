@@ -138,7 +138,7 @@
             refreshTreeView();  
 
             //Open up a socket connection to redis
-            var socket = io.connect({{config('app.factory_redis_url')}});
+            var socket = io.connect("{{config('app.factory_redis_url')}}");
             
             //Update Factories every time there is a message on Redis
             socket.on('factories', function (data) {
